@@ -1,0 +1,9 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: my-first-service
+  description: Practice service for learning Backstage
+spec:
+  type: service
+  lifecycle: experimental
+  owner: guests
