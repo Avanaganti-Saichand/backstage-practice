@@ -7,3 +7,5 @@ spec:
   type: service
   lifecycle: experimental
   owner: guests
+  dependsOn:
+    - component:default/user-service
