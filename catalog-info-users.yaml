@@ -1,1 +1,9 @@
-
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: user-service
+  description: Practice service that my-first-service depends on
+spec:
+  type: service
+  lifecycle: experimental
+  owner: guests
