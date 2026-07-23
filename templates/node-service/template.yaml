@@ -1,0 +1,41 @@
+apiVersion: scaffolder.backstage.io/v1beta3
+kind: Template
+metadata:
+  name: node-service-template
+  title: Node Service Template
+  description: Creates a bare Node.js service with a catalog file already wired in
+spec:
+  owner: guests
+  type: service
+  parameters:
+    - title: Basic info
+      required:
+        - name
+      properties:
+        name:
+          title: Service name
+          type: string
+          description: Unique name for the new service
+  steps:
+    - id: fetch
+      name: Fetch skeleton
+      action: fetch:template
+      input:
+        url: ./skeleton
+        values:
+          name: ${{ parameters.name }}
+    - id: publish
+      name: Publish to GitHub
+      action: publish:github
+      input:
+        repoUrl: github.com?owner=Avanaganti-Saichand&repo=${{ parameters.name }}
+    - id: register
+      name: Register in catalog
+      action: catalog:register
+      input:
+        repoContentsUrl: ${{ steps.publish.output.repoContentsUrl }}
+        catalogInfoPath: /catalog-info.yaml
+  output:
+    links:
+      - title: Repository
+        url: ${{ steps.publish.output.remoteUrl }}
